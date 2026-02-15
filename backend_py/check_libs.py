@@ -16,7 +16,7 @@ def start_secure_gate():
         return
 
     # Initialize video capture from the default camera device
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(1)
 
     print("Starting Secure Gate System...")
     
@@ -67,12 +67,12 @@ def start_secure_gate():
         # Render user interface elements
         h, w, _ = frame.shape
         
-        # Draw status bar at the bottom of the frame
-        cv2.rectangle(frame, (0, h - 60), (w, h), status_color, -1)
+        # Draw status bar at the top-left of the frame
+        cv2.rectangle(frame, (0, 0), (400, 60), status_color, -1)
         
         # Select text color based on background for optimal visibility
         text_color = (0, 0, 0) if status_color == (0, 255, 255) else (255, 255, 255)
-        cv2.putText(frame, status_message, (20, h - 20), 
+        cv2.putText(frame, status_message, (20, 40), 
                     cv2.FONT_HERSHEY_SIMPLEX, 0.7, text_color, 2)
 
         # Display the processed frame
