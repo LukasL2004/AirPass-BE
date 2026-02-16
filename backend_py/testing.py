@@ -26,6 +26,7 @@ def test_compare_vectors(live_vector, qr_vector):
     print("\n[TEST] Compare Vectors Test Results:")
     print(f"Match: {results['is_match']}")
     print(f"Distance: {results['distance']}")
+    
 
 
 
