@@ -32,6 +32,6 @@ def test_compare_vectors(live_vector, qr_vector):
 
 if __name__ == "__main__":
     qr_vector = test_face_engine("backend_py/imgs/Eu.jpg")
-    live_vector = test_face_engine("backend_py/imgs/webcam.jpg")
+    live_vector = test_face_engine("backend_py/imgs/Zbuce_2.jpeg")
 
     test_compare_vectors(live_vector, qr_vector)
