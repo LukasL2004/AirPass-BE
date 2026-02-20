@@ -45,5 +45,5 @@ def encrypt_image(image_path):
 
 # Example usage
 if __name__ == "__main__":
-    image_path = "backend_py/imgs/Eu.jpg"
+    image_path = "backend_py/imgs/Zbuce_1.jpeg"
     encrypt_image(image_path)

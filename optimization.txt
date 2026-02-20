@@ -1,0 +1,38 @@
+/api/verify
+response time: 11s-15s
+cold response time: 28s
+
+Response Size: 252 B
+    
+    Headers
+        126 B
+    Body
+        126 B
+
+Request Size: 203.2 KB
+
+    Headers
+        268 B
+    Body
+        202.94 KB
+
+
+
+/api/enroll
+response time: 9s - 11s
+
+
+
+Response Size: 10.42 KB
+    
+    Headers: 128 B
+    
+    Body: 10.3 KB
+    
+
+Request Size: 402.57 KB
+    
+    Headers: 392 B
+        
+    Body: 402.19 KB
+        

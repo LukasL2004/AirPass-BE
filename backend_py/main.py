@@ -2,7 +2,7 @@
 
 from fastapi import FastAPI
 
-from backend_py.models import EnrollRequest
+from backend_py.models import EnrollRequest, VerifyRequest
 from backend_py.secure_getter import decrypt_image_from_string
 from backend_py.face_engine import FaceEngine
 
@@ -25,21 +25,51 @@ def read_root():
 # Enroll endpoint
 @app.post("/api/enroll")
 async def enroll(request: EnrollRequest):
+
+    try:
     
-    print(f"[INFO] Received encrypted image data: {request.encrypted_image}")
+        print(f"[INFO] Received encrypted image data: {request.encrypted_image}")
 
-    decrypted_image = decrypt_image_from_string(request.encrypted_image)
+        decrypted_image = decrypt_image_from_string(request.encrypted_image)
 
-    print(f"[INFO] Getting the biometric vector from the decrypted image")
+        print(f"[INFO] Getting the biometric vector from the decrypted image")
 
-    fe = FaceEngine()
-    biometric_vector = fe.generate_vector(decrypted_image)
+        fe = FaceEngine()
+        biometric_vector = fe.generate_vector(decrypted_image)
 
-    return {"message": "Received data successfully",
-            "biometric_vector": biometric_vector}
+        return {"message": "Received data successfully",
+                "biometric_vector": biometric_vector}
+    except Exception as e:
+        print(f"[ERROR] An error occurred during enrollment: {e}")
+
+        return {"message": f"An error occurred during enrollment: {str(e)}",
+                "biometric_vector": None}
     
 
 
-@app.get("/api/verify")
-def verify():
-    return {"message": "Verification endpoint - To be implemented"}
+@app.post("/api/verify")
+def verify(request: VerifyRequest):
+    
+    try:
+        print(f"[INFO] Received data successfully for verification")
+
+        decrypted_image = decrypt_image_from_string(request.encrypted_image)
+        print(f"[INFO] Getting the biometric vector from the decrypted image for verification")
+        fe = FaceEngine()
+        results_image_to_verify = fe.generate_vector(decrypted_image)
+
+        biometric_vector_to_verify = results_image_to_verify["biometric_vector"]
+
+        #print(biometric_vector_to_verify)
+
+        results = fe.compare_vectors(biometric_vector_to_verify, request.biometric_vector)
+
+        return {"message": "Received data successfully",
+                "verification_results": results}
+    except Exception as e:
+        print(f"[ERROR] An error occurred during verification: {e}")
+
+        return {"message": f"An error occurred during verification: {str(e)}",
+                "verification_results": None}
+
+
