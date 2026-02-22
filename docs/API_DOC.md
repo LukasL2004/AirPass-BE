@@ -30,9 +30,7 @@ This endpoint receives an encrypted image of the passenger, extracts the face, a
     "message": "Received data successfully",
     "biometric_vector": {
         "status": "success",
-        "biometric_vector": [
-            -0.18290872871875763,
-        ]
+        "biometric_vector": "asdafafgag" {base64},
     }
 }
 ```
@@ -52,7 +50,7 @@ This endpoint is called when the passenger passes through the physical gate. It 
 ```json
 
 {
-    "biometric_vector": [-0.18290872871875763 ],
+    "biometric_vector": "asdafafgag" {base64},
     "encrypted_image": "gAAAAABpmFSJ0lccU_lQVCSgedjkc_4Vf0i"
 
 }
