@@ -35,4 +35,8 @@ Request Size: 402.57 KB
     Headers: 392 B
         
     Body: 402.19 KB
+
+
+biometric_vector: 10.7kb
+
         

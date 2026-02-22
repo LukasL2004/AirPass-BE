@@ -94,3 +94,15 @@ class FaceEngine:
                 "distance": None,
                 "message": str(e)
             }
+        
+
+    def resize_image(self, img_cv2, target_size=(600, 600)):
+        try:
+            resized_img = cv2.resize(img_cv2, target_size)
+            print(f"[INFO] Image resized successfully to {target_size}")
+
+            return resized_img
+
+        except Exception as e:
+            print(f"[ERROR] An error occurred while resizing the image: {e}")
+            return img_cv2 # Return the original image if resizing fails

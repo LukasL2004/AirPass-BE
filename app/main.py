@@ -24,7 +24,7 @@ def read_root():
 
 # Enroll endpoint
 @app.post("/api/enroll")
-async def enroll(request: EnrollRequest):
+def enroll(request: EnrollRequest):
 
     try:
     
@@ -35,6 +35,10 @@ async def enroll(request: EnrollRequest):
         print(f"[INFO] Getting the biometric vector from the decrypted image")
 
         fe = FaceEngine()
+
+        # Resize the decrypted image 
+        #decrypted_image_resized = fe.resize_image(decrypted_image)
+
         biometric_vector = fe.generate_vector(decrypted_image)
 
         return {"message": "Received data successfully",
@@ -56,16 +60,24 @@ def verify(request: VerifyRequest):
         decrypted_image = decrypt_image_from_string(request.encrypted_image)
         print(f"[INFO] Getting the biometric vector from the decrypted image for verification")
         fe = FaceEngine()
+
+        # Resize the decrypted image 
+        #decrypted_image_resized = fe.resize_image(decrypted_image)
+
+        # Generate the biometric vector from the decrypted and resized image
         results_image_to_verify = fe.generate_vector(decrypted_image)
 
+        # Extract the biometric vector from the results to verify
         biometric_vector_to_verify = results_image_to_verify["biometric_vector"]
 
         #print(biometric_vector_to_verify)
 
+        # Compare the biometric vector from the image to verify with the biometric vector from the QR code
         results = fe.compare_vectors(biometric_vector_to_verify, request.biometric_vector)
 
         return {"message": "Received data successfully",
                 "verification_results": results}
+    
     except Exception as e:
         print(f"[ERROR] An error occurred during verification: {e}")
 
