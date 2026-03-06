@@ -9,7 +9,7 @@ from app.vector_codec import compress_vector, decompress_vector, transform_vecto
 
 
 class FaceEngine:
-    def __init__(self, model_name="ArcFace", detector="retinaface", threshold=0.5):
+    def __init__(self, model_name="Facenet", detector="retinaface", threshold=0.5):
         self.model_name = model_name
         self.detector = detector
         self.threshold = threshold
